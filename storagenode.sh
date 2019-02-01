@@ -17,7 +17,7 @@ if [[ $* == *--ngrok* ]]; then
   fi
 
   trap "kill $ngrok_pid" ERR INT 
-  address=$(curl -s http://localhost:4040/api/tunnels|jq .tunnels[0].public_url|sed "s,tcp://,,")
+  address=$(curl -s http://localhost:4040/api/tunnels|jq .tunnels[0].public_url|sed "s,tcp://,,"|sed 's,",,g')
 fi
 
 echo "external address: $address"
